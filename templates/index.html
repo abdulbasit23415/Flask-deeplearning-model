@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Prediction</title>
+</head>
+<body>
+    <h1>Titanic Survival Prediction</h1>
+
+    <!-- Add an ID to the form -->
+    <form id="predictionForm" method="POST">
+        <label for="pclass">Pclass (1, 2, or 3):</label>
+        <input type="number" id="pclass" name="pclass" required><br><br>
+
+        <label for="sex">Sex (male or female):</label>
+        <input type="text" id="sex" name="sex" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" step="any" id="age" name="age" required><br><br>
+
+        <label for="sibsp">Siblings/Spouses Aboard (sibsp):</label>
+        <input type="number" id="sibsp" name="sibsp" required><br><br>
+
+        <label for="parch">Parents/Children Aboard (parch):</label>
+        <input type="number" id="parch" name="parch" required><br><br>
+
+        <label for="fare">Fare:</label>
+        <input type="number" step="any" id="fare" name="fare" required><br><br>
+
+        <label for="embarked">Embarked (C, Q, S):</label>
+        <input type="text" id="embarked" name="embarked" required><br><br>
+
+        <label for="class">Class (First, Second, Third):</label>
+        <input type="text" id="class" name="class" required><br><br>
+
+        <label for="who">Who (man, woman, child):</label>
+        <input type="text" id="who" name="who" required><br><br>
+
+        <label for="adult_male">Adult Male (True or False):</label>
+        <input type="text" id="adult_male" name="adult_male" required><br><br>
+
+        <label for="deck">Deck (A, B, C, D, E, F, G, or unknown):</label>
+        <input type="text" id="deck" name="deck" required><br><br>
+
+        <label for="embark_town">Embark Town:</label>
+        <input type="text" id="embark_town" name="embark_town" required><br><br>
+
+        <label for="alive">Alive (yes or no):</label>
+        <input type="text" id="alive" name="alive" required><br><br>
+
+        <label for="alone">Alone (True or False):</label>
+        <input type="text" id="alone" name="alone" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- Prediction result will appear here -->
+    <div id="predictionResult"></div>
+
+    <!-- Add JavaScript to handle form submission -->
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page refresh
+
+            // Get form data
+            const formData = new FormData(this);
+
+            // Send data to Flask backend using AJAX
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Update the page with the prediction result
+                document.getElementById('predictionResult').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
