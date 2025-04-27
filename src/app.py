@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 app = Flask(__name__)
 
 # Load the saved model
-model = keras.models.load_model('titanic_mlp_model.h5')
+model = keras.models.load_model('src/titanic_mlp_model.h5')
 # Initialize a scaler (ensure it matches the one used during training)
 scaler = StandardScaler()
 
@@ -52,6 +52,3 @@ def predict():
     
     except Exception as e:
         return f"error: {str(e)}"
-
-if __name__ == '__main__':
-    app.run(debug=True)
