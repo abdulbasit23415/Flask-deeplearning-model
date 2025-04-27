@@ -1,10 +1,12 @@
 import keras
 from flask import Flask, render_template, request
 from sklearn.preprocessing import StandardScaler
+from pathlib import Path
+
 app = Flask(__name__)
 
 # Load the saved model
-model = keras.models.load_model('./titanic_mlp_model.h5')
+model = keras.models.load_model(Path('src/titanic_mlp_model.h5')) 
 # Initialize a scaler (ensure it matches the one used during training)
 scaler = StandardScaler()
 
