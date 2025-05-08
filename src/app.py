@@ -6,7 +6,7 @@ from pathlib import Path
 app = Flask(__name__)
 
 # Load the saved model
-model_path = Path(r"C:\Users\Aims Tech\Downloads\Sem 6\ML\Flask Assignment 3\src\titanic_mlp_model.h5")
+model_path = Path("/titanic_mlp_model.h5")
 print(f"Loading model from: {model_path}")
 model = keras.models.load_model(model_path)
 # Initialize a scaler (ensure it matches the one used during training)
